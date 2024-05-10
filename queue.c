@@ -3,15 +3,6 @@
 #include <stdio.h>
 #include "queue.h"
 
-void node_init(Node *n, int data) {
-    n->data = data;
-    n->next = NULL;
-}
-
-void node_free(Node *n) {
-    n->next = NULL;
-}
-
 void node_set_data(Node *n, int data) {
     n->data = data;
 }
@@ -35,7 +26,8 @@ void queue_free(Queue *q) {
 
     while (current != NULL) {
         next = current->next;
-        node_free(current);
+        current->next = NULL;
+        free(current);
         current = next;
     }
 
@@ -45,7 +37,7 @@ void queue_free(Queue *q) {
 
 void queue_enqueue(Queue *q, int data) {
     Node *new_node = (Node *)malloc(sizeof(Node));
-    node_init(new_node, data);
+    node_set_data(new_node, data);
 
     if (q->rear == NULL) {
         q->front = new_node;

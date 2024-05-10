@@ -11,9 +11,6 @@ typedef struct node {
     struct node* next;
 } Node;
 
-void node_init(Node* n, int data);
-void node_free(Node* n);
-
 void node_set_data(Node* n, int data);
 int node_get_data(Node* n);
 
